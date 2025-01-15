@@ -1,0 +1,11 @@
+{
+    "name": "octopus/bibliotheque",
+    "autoload": {
+        "psr-4": {
+            "Octopus\\Bibliotheque\\": "src/"
+        }
+    },
+    "require": {
+        "erusev/parsedown": "^1.7"
+    }
+}
