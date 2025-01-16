@@ -5,22 +5,30 @@ use Parsedown;
 
 $parsedown = new Parsedown();
 
-$directories = [
-    'Octopus/Vikunja' => 'Vikunja',
-    'Octopus/Vikunja/README.md' => 'Vikunja',
+// Répertoire principal à scanner
+$baseDirectory = 'Octopus';
 
-    'Octopus/Gitlab' => 'Gitlab',
-    'Octopus/Gitlab/README.md' => 'Gitlab',
+// Lire les répertoires dans le répertoire principal
+$directories = [];
 
-    'Octopus/Portainer' => 'Portainer',
-    'Octopus/Portainer/README.md' => 'Portainer',
- 
-    'Octopus/Facebook' => 'Facebook'
-];
+//is_dir pour vérifier si une entrée de système de fichiers est un répertoire
+if (is_dir($baseDirectory)) {
+    // // scandir retourne un tableau contenant les noms des fichiers et des répertoires qu'il contient.
+    $items = scandir($baseDirectory);
+    foreach ($items as $item) {
+        if ($item !== '.' && $item !== '..') {
+            $directories[$baseDirectory . '/' . $item] = $item;
+        }
+    }
+}
+
 // Vérifie si le paramètre 'lien' est défini dans l'URL
+//isset() est utilisée pour vérifier si une variable est définie et n'est pas null
+//$_GET est une superglobale qui est utilisée pour collecter les données envoyées 
+//dans l'URL via une requête HTTP GET
 if (isset($_GET['lien'])) {
     $lien = $_GET['lien'];
-
+    // file_exists pour vérifier si un fichier ou un répertoire existe
     if (file_exists($lien)) { 
         $markdown = file_get_contents($lien); // Lire le contenu du fichier
         $html = $parsedown->text($markdown); // Convertir en HTML
@@ -40,16 +48,17 @@ if (isset($_GET['lien'])) {
     <title>Liste de serveurs disponibles</title>
 </head>
 <body>
+    <!-- empty() est utilisée pour vérifier si une variable est vide -->
     <?php if (empty($html)): ?>
 
         <h1>Liste de serveurs disponibles</h1>
 
         <?php foreach ($directories as $repertoir => $nom): ?>
-            
+            <!-- is_dir() est utilisée pour vérifier si une entrée de système de fichiers est un répertoire-->
             <?php if (is_dir($repertoir)): ?>
                 <h2>
 
-                    <a href="http://<?php echo strtolower($nom); ?>.octopus.cnrs.fr/login" target ="_blank"><?php echo $nom; ?> </a><br>
+                    <a href="http://<?php echo $nom; ?>.octopus.cnrs.fr/login" target ="_blank"><?php echo $nom; ?> </a><br>
             
                     <!--Tous les README.md -->
                     <?php if (file_exists($repertoir . '/README.md')): ?>
