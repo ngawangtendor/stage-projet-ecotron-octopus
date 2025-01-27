@@ -1,5 +1,27 @@
-| Aligné à gauche  | Centré          | Aligné à droite |
-| :--------------- |:---------------:| -----:|
-| Aligné à gauche  |   ce texte        |  Aligné à droite |
-| Aligné à gauche  | est             |   Aligné à droite |
-| Aligné à gauche  | centré          |    Aligné à droite |
+---
+tags:
+  - Docker
+  - Conteneur
+  - Portainer
+  - Service
+---
+
+
+## Description
+Versionning Server
+
+----
+## Installation
+- [[Octopus/Documentation/Systeme/Watchdog|Guide d'installation]]
+
+---
+## Configuration
+
+### Container
+- name : portainer
+- Port : 9001
+- root : octopus
+- URL : http://portainer.octopus.cnrs.fr/
+
+
+

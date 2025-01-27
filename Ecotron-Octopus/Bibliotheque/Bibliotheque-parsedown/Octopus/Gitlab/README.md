@@ -1,5 +1,25 @@
-| Aligné à gauche  | Centré          | Aligné à droite |
-| :--------------- |:---------------:| -----:|
-| Aligné à gauche  |   ce texte        |  Aligné à droite |
-| Aligné à gauche  | est             |   Aligné à droite |
-| Aligné à gauche  | centré          |    Aligné à droite |
+---
+tags:
+  - Docker
+  - Conteneur
+  - GitLab
+  - Service
+---
+
+
+
+
+## Description
+....
+
+--- 
+
+## Installation
+- [[Octopus/Documentation/Systeme/GitLab|Guide d'installation]]
+
+---
+## Configuration
+- name : gitlab
+- Port : 33070
+- root : root
+- URL : http://gitlab.octopus.cnrs.fr/

@@ -1,42 +1,106 @@
 <?php
-// Fonction pour lister les fichiers et dossiers dans un répertoire donné
-
+// Configuration des images
+$images = [
+    'dossier' => 'image/0175f425-d2c7-4d5e-a6de-4ce63b1ec86a.webp',
+    'fichier' => 'image/logo.webp',
+    'pdf' => 'img/logo.webp',
+    'image' => 'img/logo.webp',
+    'default' => 'img/logo.webp'
+];
 
 function list_dir($name) {
-    // Ouvrir le répertoire spécifié
+    global $images;
+    
     if ($dir = opendir($name)) {
-        echo "<ul style='list-style-type: none; padding: 0;'>";
-        // Lire chaque fichier et dossier dans le répertoire
+        echo '<div class="container-fluid mt-3">';
+        echo '<div class="row g-3">'; // g-3 pour l'espace entre les éléments
+        
         while (($file = readdir($dir)) !== false) {
-            // Ignorer les entrées "." et ".."
             if ($file != "." && $file != "..") {
-                // Construire le chemin complet du fichier ou dossier
-                $fullPath = $name . DIRECTORY_SEPARATOR . $file;
-
-                // Vérifier si c'est un dossier
-                if (is_dir($fullPath)) {
-                    // Afficher un lien vers le dossier avec une icône de dossier
-                    echo '<li>📁 <a href="brouse.php?dir=' . urlencode($fullPath) . '" target="_blank">' . htmlspecialchars($file) . '/</a></li>';
-                } else {
-                    // Afficher un lien vers le fichier avec une icône de fichier
-                    echo '<li>📄 <a href="doc.php?dir=' . urlencode($name) . '&file=' . urlencode($file) . '" target="_blank">' . htmlspecialchars($file) . '</a></li>';
+                $fullPath = $name . '/' . $file;
+                $isDir = is_dir($fullPath);
+                
+                // Déterminer l'image à utiliser
+                $icon = $isDir ? $images['dossier'] : $images['fichier'];
+                
+                // Gestion des types de fichiers spécifiques
+                if (!$isDir) {
+                    $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+                    if ($ext === 'pdf') $icon = $images['pdf'];
+                    if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])) $icon = $images['image'];
                 }
+
+                echo '<div class="col-6 col-sm-4 col-md-3 col-lg-2">';
+                echo '<div class="text-center p-2 file-item">';
+                
+                // Lien cliquable
+                if ($isDir) {
+                    echo '<a href="brouse.php?dir=' . urlencode($fullPath) . '" class="text-decoration-none text-dark">';
+                } else {
+                    echo '<a href="doc.php?dir=' . urlencode($name) . '&file=' . urlencode($file) . '" class="text-decoration-none text-dark">';
+                }
+                
+                // Image avec hover effect
+                echo '<img src="' . $icon . '" class="img-fluid mb-2 file-image" alt="' . htmlspecialchars($file) . '">';
+                
+                // Nom du fichier/dossier
+                echo '<div class="file-name small">' . htmlspecialchars($file) . '</div>';
+                echo '</a></div></div>';
             }
         }
-        echo "</ul>";
-        // Fermer le répertoire
+        
+        echo '</div></div>';
         closedir($dir);
     }
 }
 
-// Vérifier si le paramètre 'dir' est défini dans l'URL
+// Ajout du CSS Bootstrap + personnalisation
+echo '
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+.file-image {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    transition: transform 0.2s;
+}
+
+.file-item:hover .file-image {
+    transform: scale(1.1);
+}
+
+.file-name {
+    word-break: break-word;
+    max-width: 100px;
+    margin: 0 auto;
+}
+
+.file-item {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.file-item:hover {
+    background: #f8f9fa;
+}
+</style>';
+
+// Sécurité et traitement
 if (isset($_GET['dir'])) {
-    // Décoder le paramètre pour obtenir le répertoire
     $directory = urldecode($_GET['dir']);
-    // Lister les fichiers et dossiers dans le répertoire spécifié
+    // Vérification de sécurité du chemin
+    if(!verifyPath($directory)) {
+        die('Accès non autorisé');
+    }
     list_dir($directory);
 } else {
-    // Par défaut, lister les fichiers et dossiers dans le répertoire "Octopus"
     list_dir("Octopus");
+}
+
+// Fonction de vérification de sécurité
+function verifyPath($path) {
+    $base = realpath('Octopus');
+    $userPath = realpath($path);
+    return $userPath && strpos($userPath, $base) === 0;
 }
 ?>
