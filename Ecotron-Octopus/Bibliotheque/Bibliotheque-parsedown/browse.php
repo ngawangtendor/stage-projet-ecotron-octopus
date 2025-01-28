@@ -35,7 +35,7 @@ function list_dir($name) {
                 
                 // Lien cliquable
                 if ($isDir) {
-                    echo '<a href="brouse.php?dir=' . urlencode($fullPath) . '" class="text-decoration-none text-dark">';
+                    echo '<a href="browse.php?dir=' . urlencode($fullPath) . '" class="text-decoration-none text-dark">';
                 } else {
                     echo '<a href="doc.php?dir=' . urlencode($name) . '&file=' . urlencode($file) . '" class="text-decoration-none text-dark">';
                 }

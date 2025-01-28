@@ -38,8 +38,6 @@ if (isset($_GET['dir']) && isset($_GET['file'])) {
     }
 } else {
     // Si aucun fichier n'est spécifié, inclure le script pour lister les dossiers
-    include "brouse.php";
+    include "browse.php";
 }
 ?>
-
-
