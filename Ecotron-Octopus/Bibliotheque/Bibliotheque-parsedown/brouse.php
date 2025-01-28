@@ -1,11 +1,11 @@
 <?php
 // Configuration des images
 $images = [
-    'dossier' => 'image/0175f425-d2c7-4d5e-a6de-4ce63b1ec86a.webp',
-    'fichier' => 'image/logo.webp',
-    'pdf' => 'img/logo.webp',
-    'image' => 'img/logo.webp',
-    'default' => 'img/logo.webp'
+    'dossier' => 'image/folder_4673908.png',
+    'fichier' => 'image/icons8-fichier-96.png',
+    'pdf' => 'img/icons8-fichier-96.png',
+    'image' => 'img/icons8-fichier-96.png',
+    'default' => 'img/icons8-fichier-96.png'
 ];
 
 function list_dir($name) {
@@ -30,7 +30,7 @@ function list_dir($name) {
                     if (in_array($ext, ['jpg', 'jpeg', 'png', 'gif'])) $icon = $images['image'];
                 }
 
-                echo '<div class="col-6 col-sm-4 col-md-3 col-lg-2">';
+                echo '<div class="col-3 col-sm-2.5 col-md-1 col-lg-2">';
                 echo '<div class="text-center p-2 file-item">';
                 
                 // Lien cliquable
