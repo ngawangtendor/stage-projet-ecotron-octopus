@@ -1,43 +1,43 @@
 <?php
 
-// Charger les dépendances nécessaires
+// Load necessary dependencies
 require 'vendor/autoload.php';
 
-// Utiliser la classe Parsedown pour convertir le Markdown en HTML
+// Use the Parsedown class to convert Markdown to HTML
 use Parsedown;
 
-// Vérifier si les paramètres 'dir' et 'file' sont définis dans l'URL
+// Check if the 'dir' and 'file' parameters are set in the URL
 if (isset($_GET['dir']) && isset($_GET['file'])) {
-    // Décoder les paramètres pour obtenir le chemin du fichier
+    // Decode the parameters to get the file path
     $directory = urldecode($_GET['dir']);
     $file = urldecode($_GET['file']);
     $fullPath = $directory . DIRECTORY_SEPARATOR . $file;
 
-    // Vérifier si le fichier existe
+    // Check if the file exists
     if (file_exists($fullPath)) {
-        // Obtenir l'extension du fichier
+        // Get the file extension
         $fileExtension = pathinfo($file, PATHINFO_EXTENSION);
 
-        // Si l'extension est 'md', c'est un fichier Markdown
+        // If the extension is 'md', it's a Markdown file
         if ($fileExtension == 'md') {
-            // Lire le contenu du fichier Markdown
+            // Read the content of the Markdown file
             $markdownContent = file_get_contents($fullPath);
-            // Convertir le Markdown en HTML
+            // Convert the Markdown to HTML
             $parsedown = new Parsedown();
             $htmlContent = $parsedown->text($markdownContent);
 
-            // Afficher le contenu HTML
+            // Display the HTML content
             echo $htmlContent;
         } else {
-            // Si ce n'est pas un fichier Markdown, afficher un message d'erreur
-            echo 'Le fichier n\'est pas un fichier markdown.';
+            // If it's not a Markdown file, display an error message
+            echo 'The file is not a Markdown file.';
         }
     } else {
-        // Si le fichier n'existe pas, afficher un message d'erreur
-        echo 'Le fichier spécifié n\'existe pas.';
+        // If the file doesn't exist, display an error message
+        echo 'The specified file does not exist.';
     }
 } else {
-    // Si aucun fichier n'est spécifié, inclure le script pour lister les dossiers
+    // If no file is specified, include the script to list directories
     include "browse.php";
 }
 ?>
