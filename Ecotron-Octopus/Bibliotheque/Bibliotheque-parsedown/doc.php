@@ -35,6 +35,5 @@ if (isset($_GET['dir']) && isset($_GET['file'])) {
 } else {
     // If no file is specified, include the script to list directories
     include "browse.php";
-
 }
 ?>

@@ -111,4 +111,5 @@ echo
         $userPath = realpath($path);  // Get the real path of the requested directory
         return $userPath && strpos($userPath, $base) === 0;  // Ensure the path is inside the base directory
     }
+    
 ?>

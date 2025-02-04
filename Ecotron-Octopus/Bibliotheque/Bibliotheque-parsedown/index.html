@@ -34,101 +34,36 @@
     }
     
 
-    /* flex box*/
-    html {
-        background: #f5f7f8;
-        font-family: 'Roboto', sans-serif;
-        -webkit-font-smoothing: antialiased;
-        padding: 20px 0;
-    }
 
-    .band {
-      width: 90%;
-      max-width: 1240px;
-      margin: 0 auto;
-    
-      display: grid;
-    
-      grid-template-columns: 1fr;
-      grid-template-rows: auto;
-      grid-gap: 30px;
-    }
-
-    @media only screen and (min-width: 500px) {
-      .band {
-        grid-template-columns: 1fr 1fr;
-      }  
-      .item-1 {
-      grid-column: 1/ span 2;
-      }
-      .item-1 h1 {
-        font-size: 30px;
-      }
-    }
-
-    @media only screen and (min-width: 850px) {
-      .band {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-      }
-    }
-
-    /* card */
-
-    .card {
-      min-height: 100%;
-      background: rgb(251, 100, 100);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: #444;
-      position: relative;
-      top: 0;
+    /* flex box */
+    .custom-card {
+      background: rgb(251, 233, 100) !important;
+      box-shadow: 0 2px 5px rgba(238, 178, 178, 0.1);
+      border: none;
       transition: all .1s ease-in;
+      text-decoration: none;
+      color: #78f7ab;
+      position: relative;
+      top: 20px;
     }
 
-    .card:hover {
-      top: -2px;
-      box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+    .custom-card:hover {
+        top: -2px;
+        box-shadow: 0 4px 5px rgba(239, 127, 127, 0.2) !important;
     }
-
-    .card article {
-      padding: 20px;
-      display: flex;
     
-      flex: 1;
-      justify-content: space-between;
-      flex-direction: column;
+    .custom-thumb {
+        padding-bottom: 50%;
+        background-size: cover;
+        background-position: center center;
+    }
     
+    .card-title {
+        font-size: 20px;
+        margin: 10px;
+        color: #333 !important;
+        text-align: center;
     }
-    .card .thumb {
-      padding-bottom: 60%;
-      background-size: cover;
-      background-position: center center;
-    }
-
-    .card p { 
-      flex: 1; /* make p grow to fill available space*/
-      line-height: 1.4;
-    }
-
-    /* typography */
-    h1 {
-      font-size: 20px;
-      margin: 10px;
-      color: #333;
-      text-align : center;
-    }
-
-    .card span {
-      font-size: 12px;
-      font-weight: bold;
-      color: #999;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      margin: 2em 0 0 0;
-    }
-
 
     /* Custom style for the footer */
     .custom-footer {
@@ -152,7 +87,7 @@
         <!-- Link to homepage with logo -->
         <a class="navbar-brand d-flex align-items-center me-auto" href="#">
             <!-- Website logo -->
-            <img src="image/octopus-svgrepo-com.svg" alt="Logo" width="50" height="40" class="d-inline-block align-text-top me-2 d-none d-sm-block">
+            <img src="page_de_garde/image/octopus-svgrepo-com.svg" alt="Logo" width="50" height="40" class="d-inline-block align-text-top me-2 d-none d-sm-block">
             <!-- Website name -->
             <span class="fs-3 fw-bolder  ">Octopus</span>
         </a>
@@ -179,33 +114,36 @@
     </div>
 
 
-    <div class="support-grid"></div>
-
-    <div class="band">
-      <div class="item-2">
-            <a href="http://gitlab.octopus.cnrs.fr" class="card" target = '_blank'>
-              <div class="thumb" style="background-image: url(image/channels4_profile.jpg);"></div>
-              <article>
-                <h1>gitlab</h1>
-              </article>
-            </a>
-      </div>
-      <div class="item-3">
-        <a href="http://portainer.octopus.cnrs.fr" class="card" target = '_blank'>
-          <div class="thumb" style="background-image: url(image/logo-portainer-1.png);"></div>
-          <article>
-            <h1>Portainer</h1>
-          </article>
-        </a>
-      </div>
-      <div class="item-4">
-            <a href="http://vikunja.octopus.cnrs.fr" class="card" target = '_blank'>
-              <div class="thumb" style="background-image: url(image/Vikunja.png);"></div>
-              <article>
-                <h1>Vikunja</h1>
-              </article>
-            </a>
-      </div>
+    <div class="container py-3">
+        <div class="row g-5 d-flex justify-content-center">
+            <div class="col-md-3">
+                <a href="http://gitlab.octopus.cnrs.fr" class="card custom-card h-100" target='_blank'>
+                    <div class="card-img-top custom-thumb" style="background-image: url(page_de_garde/image/channels4_profile.jpg);"></div>
+                    <div class="card-body">
+                        <h1 class="card-title">gitlab</h1>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-3">
+                <a href="http://portainer.octopus.cnrs.fr" class="card custom-card h-100" target='_blank'>
+                    <div class="card-img-top custom-thumb" style="background-image: url(page_de_garde/image/logo-portainer-1.png);"></div>
+                    <div class="card-body">
+                        <h1 class="card-title">Portainer</h1>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="col-md-3">
+                <a href="http://vikunja.octopus.cnrs.fr" class="card custom-card h-100" target='_blank'>
+                    <div class="card-img-top custom-thumb" style="background-image: url(page_de_garde/image/Vikunja.png);"></div>
+                    <div class="card-body">
+                        <h1 class="card-title">Vikunja</h1>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer section -->
     <footer class="custom-footer">
@@ -229,7 +167,7 @@
         // Event listener for the documentation button
         document.getElementById('affiche-readme-button').addEventListener('click', () => {
             // Open the documentation page in a new tab
-            window.open('doc.php');
+            window.open('browse.php');
         });
 
         // Initialization: generate server links when the page loads
