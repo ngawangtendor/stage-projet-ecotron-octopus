@@ -1,11 +1,7 @@
 <?php
-
 // Load necessary dependencies
-require 'vendor/autoload.php';
-
-// Use the Parsedown class to convert Markdown to HTML
-use Parsedown;
-
+require 'Parsedown.php';
+ 
 // Check if the 'dir' and 'file' parameters are set in the URL
 if (isset($_GET['dir']) && isset($_GET['file'])) {
     // Decode the parameters to get the file path
@@ -39,5 +35,6 @@ if (isset($_GET['dir']) && isset($_GET['file'])) {
 } else {
     // If no file is specified, include the script to list directories
     include "browse.php";
+
 }
 ?>

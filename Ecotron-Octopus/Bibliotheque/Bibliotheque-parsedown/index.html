@@ -12,32 +12,6 @@
         display: flex; /* Using flexbox to center the content */
         align-items: center; /* Vertically center the content */
         justify-content: center; /* Horizontally center the content */
-    }
-    
-    /* Container for the links */
-    .links-container {
-        text-align: center; /* Center the text */
-        padding: 20px; /* Add spacing around the content */
-    }
-    
-    /* Unordered list without bullets */
-    .list {
-        list-style: none; /* Remove list bullets */
-        padding-left: 1.5rem; /* Add space to the left of list items */
-    }
-    
-    /* Custom style for the list bullets */
-    .list li::before {
-        content: "•"; /* Bullet symbol */
-        color: #000; /* Bullet color */
-        margin-right: 0.75rem; /* Space between the bullet and text */
-        font-size: 1.2em; /* Bullet size */
-        margin: 0 10px; /* Space around the bullet */
-        font-size: 1.8rem; /* Redefines the bullet size */
-    }
-    
-    /* Title container with a black background and white text */
-    .title-container {
         min-height: 30vh; /* Minimum height to occupy the space */
         color: white; /* White text */
         background-color: #000000; /* Black background */
@@ -59,6 +33,103 @@
         padding: 20px; /* Internal padding of the button */
     }
     
+
+    /* flex box*/
+    html {
+        background: #f5f7f8;
+        font-family: 'Roboto', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        padding: 20px 0;
+    }
+
+    .band {
+      width: 90%;
+      max-width: 1240px;
+      margin: 0 auto;
+    
+      display: grid;
+    
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      grid-gap: 30px;
+    }
+
+    @media only screen and (min-width: 500px) {
+      .band {
+        grid-template-columns: 1fr 1fr;
+      }  
+      .item-1 {
+      grid-column: 1/ span 2;
+      }
+      .item-1 h1 {
+        font-size: 30px;
+      }
+    }
+
+    @media only screen and (min-width: 850px) {
+      .band {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+    }
+
+    /* card */
+
+    .card {
+      min-height: 100%;
+      background: rgb(251, 100, 100);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: #444;
+      position: relative;
+      top: 0;
+      transition: all .1s ease-in;
+    }
+
+    .card:hover {
+      top: -2px;
+      box-shadow: 0 4px 5px rgba(0,0,0,0.2);
+    }
+
+    .card article {
+      padding: 20px;
+      display: flex;
+    
+      flex: 1;
+      justify-content: space-between;
+      flex-direction: column;
+    
+    }
+    .card .thumb {
+      padding-bottom: 60%;
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .card p { 
+      flex: 1; /* make p grow to fill available space*/
+      line-height: 1.4;
+    }
+
+    /* typography */
+    h1 {
+      font-size: 20px;
+      margin: 10px;
+      color: #333;
+      text-align : center;
+    }
+
+    .card span {
+      font-size: 12px;
+      font-weight: bold;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin: 2em 0 0 0;
+    }
+
+
     /* Custom style for the footer */
     .custom-footer {
         background-color: #747679; /* Grey background color */
@@ -107,6 +178,35 @@
         <ul class="list" id="server-list"></ul>
     </div>
 
+
+    <div class="support-grid"></div>
+
+    <div class="band">
+      <div class="item-2">
+            <a href="http://gitlab.octopus.cnrs.fr" class="card" target = '_blank'>
+              <div class="thumb" style="background-image: url(image/channels4_profile.jpg);"></div>
+              <article>
+                <h1>gitlab</h1>
+              </article>
+            </a>
+      </div>
+      <div class="item-3">
+        <a href="http://portainer.octopus.cnrs.fr" class="card" target = '_blank'>
+          <div class="thumb" style="background-image: url(image/logo-portainer-1.png);"></div>
+          <article>
+            <h1>Portainer</h1>
+          </article>
+        </a>
+      </div>
+      <div class="item-4">
+            <a href="http://vikunja.octopus.cnrs.fr" class="card" target = '_blank'>
+              <div class="thumb" style="background-image: url(image/Vikunja.png);"></div>
+              <article>
+                <h1>Vikunja</h1>
+              </article>
+            </a>
+      </div>
+
     <!-- Footer section -->
     <footer class="custom-footer">
         <div class="container">
@@ -125,37 +225,11 @@
 
     <!-- JavaScript code -->
     <script>
-        // Server data: list of objects with server names and URLs
-        const servers = [
-            { name: 'Gitlab', url: 'http://gitlab.octopus.cnrs.fr' },
-            { name: 'Portainer', url: 'http://portainer.octopus.cnrs.fr' },
-            { name: 'Vikunja', url: 'http://vikunja.octopus.cnrs.fr' },
-        ];
-
-        // Function to automatically generate the server links
-        function generateServerLinks() {
-            const list = document.getElementById('server-list'); // Select the list container
-
-            // Loop through the list of servers
-            servers.forEach(server => {
-                // Create an <a> element for each server
-                const link = document.createElement('a');
-                
-                // Add styling classes to the link
-                link.className = 'btn btn-outline-primary d-block text-center p-2 mb-2 justify-content-center';
-                link.href = server.url; // Set the server's URL as the link's href
-                link.textContent = `${server.name} - ${server.url}`; // Display the server name and URL as the link text
-                link.target = '_blank'; // Open the link in a new tab
-                
-                // Append the link to the list
-                list.appendChild(link);
-            });
-        }
 
         // Event listener for the documentation button
         document.getElementById('affiche-readme-button').addEventListener('click', () => {
             // Open the documentation page in a new tab
-            window.open('doc.php', '_blank');
+            window.open('doc.php');
         });
 
         // Initialization: generate server links when the page loads
