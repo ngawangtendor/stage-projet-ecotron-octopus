@@ -16,11 +16,11 @@ function list_dir($name) {
     if ($dir = opendir($name)) {
         echo '<div class="container-fluid mt-3">';
         echo '<div class="row g-3">'; // g-3 for spacing between items
-        
+
         // Loop through all files and directories in the given directory
-        while (($file = readdir($dir)) !== false) {
+           while (($file = readdir($dir)) !== false) {  
             // Skip the current directory (.) and parent directory (..)
-            if ($file != "." && $file != "..") {
+            if ($file != "." && $file != "..") { 
                 $fullPath = $name . '/' . $file;  // Build the full path to the file
                 $isDir = is_dir($fullPath);  // Check if the item is a directory
                 
@@ -102,12 +102,12 @@ echo
         }
         list_dir($directory);  // List the contents of the directory
     } else {
-        list_dir("Octopus");  // If no directory is specified, list the contents of the "Octopus" folder
+        list_dir('octopus_documentation');  // If no directory is specified, list the contents of the "Octopus" folder
     }
 
     // Function to check if the path is within the allowed directory
     function verifyPath($path) {
-        $base = realpath('Octopus');  // Get the real path of the base directory
+        $base = realpath('octopus_documentation');  // Get the real path of the base directory
         $userPath = realpath($path);  // Get the real path of the requested directory
         return $userPath && strpos($userPath, $base) === 0;  // Ensure the path is inside the base directory
     }
