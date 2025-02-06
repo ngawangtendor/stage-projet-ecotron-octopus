@@ -1,4 +1,8 @@
 <?php
+
+// Inclusion du header
+include 'header.php';
+
 // Configuration of image icons for various file types
 $images = [
     'dossier' => 'image/folder_4673908.png',  // Icon for folders
@@ -111,5 +115,8 @@ echo
         $userPath = realpath($path);  // Get the real path of the requested directory
         return $userPath && strpos($userPath, $base) === 0;  // Ensure the path is inside the base directory
     }
+
+// Inclusion du footer
+include 'footer.php';
     
 ?>
