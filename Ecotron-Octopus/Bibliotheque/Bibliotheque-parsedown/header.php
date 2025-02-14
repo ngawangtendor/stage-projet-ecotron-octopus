@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Octopus</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
     <style>
         /* Container for the title */
         .title-container {
@@ -83,7 +85,7 @@
     <header class="navbar" style="background-color: rgb(181, 243, 222);">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <!-- Logo et Titre (à gauche) -->
-            <a class="navbar-brand d-flex align-items-center" href="#">
+            <a class="navbar-brand d-flex align-items-center" href="../index.html">
                 <img src="image/octopus-svgrepo-com.svg" alt="Logo" width="50" height="40" class="d-inline-block align-text-top me-2 d-none d-sm-block">
                 <span class="fs-3 fw-bolder">Octopus</span>
             </a>
@@ -91,10 +93,24 @@
             <!-- Boutons de Retour (à droite) -->
             <div class="d-flex gap-2">
                 <!-- Retour vers une page spécifique -->
-                <a href="../index.html" class="btn btn-success">Retour à l'accueil</a>
+                <button class="btn btn-secondary btn-lg" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="bi bi-list"></i>
+                </button>
                 <!-- Retour à la page précédente -->
-                <button onclick="history.back()" class="btn btn-secondary">Retour</button>
             </div>
         </div>
+        
     </header>
+    <script>
+        // Vérifie si l'URL actuelle correspond à la page spécifiée
+        if (window.location.href === "http://octopus.cnrs.fr/page_de_garde/browse.php") {
+            // Affiche le bouton "Retour à l'accueil"
+            document.write('<a href="../index.html" class="btn btn-success">Retour à l\'accueil</a>');
+        } else {
+            // Affiche le bouton "Retour"
+            document.write('<button onclick="history.back()" class="btn btn-secondary">Retour</button>');
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
